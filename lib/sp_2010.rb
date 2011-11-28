@@ -3,7 +3,6 @@ require 'httparty'
 require 'json'
 require 'net/http'
 require 'uri'
-require 'net/dav'
 require 'file'
 require 'files_response'
 

@@ -10,21 +10,12 @@ require 'files_response'
 module Sp2010
   class Client
     include HTTParty
-    @@HOST = nil
-    @@USER = nil
-    @@PASSWORD = nil
     
-    def self.authorize(host, user, password)
-      @@HOST = host
-      @@USER = user
-      @@PASSWORD = password
-    end
-    
-    def self.get_files    
-      uri = URI.parse(@@HOST)
+    def self.get_files(host, user, password)
+      uri = URI.parse(host)
       http = Net::HTTP.new(uri.host, uri.port)
       req = Net::HTTP::Propfind.new(uri.request_uri)
-      req.basic_auth(@@USER, @@PASSWORD)
+      req.basic_auth(user, password)
       
       res = http.request(req)
       

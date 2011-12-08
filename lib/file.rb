@@ -1,3 +1,5 @@
+require 'domainatrix'
+
 module Sp2010
   class File
     attr_reader :xml
@@ -8,8 +10,8 @@ module Sp2010
       
       @name = dav_prop_at("./DAV:displayname").content
       @url = @xml.at_xpath("./DAV:href", webdav_namespace).content
-      @uri = URI.parse(URI.escape(@url))
-      @path = Pathname.new URI.unescape uri.path
+      @uri = Domainatrix.parse(@url)
+      @path = @uri.path
       
       @is_aspx = name[-5..-1] == ".aspx"
       
